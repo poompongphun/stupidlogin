@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+</head>
+<body>
+  <h1>Login</h1>
+    <div>
+      <label for="usernameInput">Username</label>
+      <input type="text" name="usernameInput" id="usernameInput" required>
+    </div>
+    <div>
+      <label for="passwordInput">Password</label>
+      <input type="password" name="passwordInput" id="passwordInput" required>
+    </div>
+    <div>
+      <button type="submit" onclick="submit()">Log In</button>
+    </div>
+  <script>
+    function submit() {
+      const username = document.getElementById('usernameInput').value;
+      const password = document.getElementById('passwordInput').value;
+      fetch('/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+      }).then(res => {
+        if (res.status === 200) {
+          window.location.href = '/home';
+        } else {
+          alert('Invalid username or password');
+        }
+      }).catch(err => {
+        console.error(err);
+      });
+    }
+  </script>
+</body>
+</html>
