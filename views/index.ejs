@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+  <div class="flex justify-center items-center h-screen bg-blue-500">
+    <div
+      class="text-center flex flex-col justify-center items-center bg-white rounded-lg gap-2 px-6 py-10 w-full max-w-[450px] shadow-xl mx-auto"
+      id="accountItem">
+      <div class="">
+        <h1 class="text-3xl font-bold">Welcome to CTF Game</h1>
+        <h4>Choose your side to continue</h4>
+        <div class="flex justify-center items-center gap-2 pt-6">
+            <a href="/login" class="max-w-[150px] w-full aspect-square bg-red-400 flex justify-center items-center font-black text-xl rounded-lg text-white">Attacker</a>
+            <a href="/user" class="max-w-[150px] w-full aspect-square bg-green-400 flex justify-center items-center font-black text-xl rounded-lg text-white">User</a>
+        </div>
+        <div class="text-left pt-6">
+          <span class="text-lg font-medium">How to play: </span>Users just need to log in. Attackers find user passwords.
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

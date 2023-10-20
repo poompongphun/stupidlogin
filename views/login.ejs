@@ -1,41 +1,49 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Login</title>
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body>
-  <h1>Login</h1>
-    <div>
-      <label for="usernameInput">Username</label>
-      <input type="text" name="usernameInput" id="usernameInput" required>
+    <div class="flex justify-center items-center h-screen bg-blue-500">
+        <div class="text-center flex flex-col justify-center items-center bg-white rounded-lg gap-2 px-6 py-10 w-full max-w-[450px] shadow-xl mx-auto"
+            id="accountItem">
+            <div class="pb-6">
+                <h1 class="text-3xl font-bold">Sign In</h1>
+                <h4>Let's go, hacker! Find the flag!</h4>
+            </div>
+            <div class="w-full flex justify-center items-center gap-2 flex-col">
+              <input type="text" class="border rounded-lg px-3 py-2 outline-none w-full" placeholder="Email" id="email">
+              <input type="text" class="border rounded-lg px-3 py-2 outline-none w-full" placeholder="Password" id="password">
+              <button class="bg-blue-500 text-white px-4 py-2 rounded-lg" onclick="login()">Login</button>
+            </div>
+        </div>
     </div>
-    <div>
-      <label for="passwordInput">Password</label>
-      <input type="password" name="passwordInput" id="passwordInput" required>
-    </div>
-    <div>
-      <button type="submit" onclick="submit()">Log In</button>
-    </div>
-  <script>
-    function submit() {
-      const username = document.getElementById('usernameInput').value;
-      const password = document.getElementById('passwordInput').value;
-      fetch('/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username, password })
-      }).then(res => {
-        if (res.status === 200) {
-          window.location.href = '/home';
-        } else {
-          alert('Invalid username or password');
+    <script>
+        async function login() {
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+
+          const check = await fetch("/check", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              email,
+              password
+            })
+          })
+          const checkData = await check.json()
+          if (checkData.message === "Password incorrect" || checkData.message === "User not found") {
+            alert("Wrong email or password, please try again")
+          } else {
+            alert("You win!")
+          }
         }
-      }).catch(err => {
-        console.error(err);
-      });
-    }
-  </script>
+    </script>
 </body>
+
 </html>

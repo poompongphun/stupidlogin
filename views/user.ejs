@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>All Users</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+  <div class="flex justify-center items-center h-screen bg-blue-500">
+    <div
+      class="text-center flex flex-col justify-center items-center bg-white rounded-lg gap-2 px-6 py-10 w-full max-w-[450px] shadow-xl mx-auto"
+      id="accountItem">
+      <div class="pb-6">
+        <h1 class="text-3xl font-bold">Welcome back</h1>
+        <h4>Choose your account to continue</h4>
+      </div>
+      <% for (let i=0; i < accounts.length; i++) { %>
+        <div class=" w-full border p-2 rounded-lg flex justify-between items-center gap-2">
+          <div class="flex justify-start items-center gap-2">
+            <img
+              src="<%- accounts[i].profile %>"
+              alt="profile" class="w-[50px] h-[50px] rounded-full">
+            <div class="font-bold"><%- accounts[i].name %></div>
+          </div>
+          <div>
+            <a class="bg-blue-500 text-white px-4 py-2 rounded-lg" href="/home/<%- accounts[i].id %>">Continue</a>
+          </div>
+        </div>
+        <% } %>
+    </div>
+  </div>
+</body>
+
+</html>

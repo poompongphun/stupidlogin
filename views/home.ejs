@@ -1,10 +1,52 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Logged In</title>
-    </head>
-    <body>
-        <h1>Welcome to the logged in page!</h1>
-        <p>You are now logged in.</p>
-    </body>
+
+<head>
+    <title>Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="flex justify-center items-center h-screen bg-blue-500" id="profile">
+    </div>
+    <script>
+        const profile = document.getElementById("profile");
+        fetchUser();
+
+        async function fetchUser() {
+            const user = await fetch(
+                "/user/<%- id %>"
+            ).then((res) => res.json());
+            profile.innerHTML = `
+            <div
+                class="text-center flex flex-col justify-center items-center bg-white rounded-lg gap-2 px-10 py-10 shadow-xl mx-auto">
+                <div class="flex items-center gap-4 border-b pb-6">
+                    <img alt="profile" class="w-[100px] h-[100px] rounded-full"
+                        src="${user.profile}">
+
+                    <h1 class="text-3xl font-bold">${user.name}</h1>
+                </div>
+                <div class="grid grid-cols-1 gap-4 pt-6 w-full">
+                    <div class="relative">
+                        <label class="absolute top-[-10px] bg-white text-sm left-1 text-slate-500">Username</label>
+                        <input type="text" class="border rounded-lg px-3 py-2 outline-none w-full col-span-2" placeholder="Name"
+                        value="${user.name}" disabled>
+                    </div>
+                    <div class="relative">
+                        <label class="absolute top-[-10px] bg-white text-sm left-1 text-slate-500">Email</label>
+                        <input type="email" class="border rounded-lg px-3 py-2 outline-none w-full" placeholder="Email" value="${user.email}"
+                            disabled>
+                    </div>
+                    <div class="relative">
+                        <label class="absolute top-[-10px] bg-white text-sm left-1 text-slate-500">Password</label>
+                        <input type="password" class="border rounded-lg px-3 py-2 outline-none w-full" placeholder="Password" value="${user.password}"
+                            value="Hey this is secret" disabled>
+                    </div>
+                </div>
+            </div>
+            `
+        }
+    </script>
+</body>
+
 </html>
